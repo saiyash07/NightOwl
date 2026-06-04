@@ -1,0 +1,17 @@
+{
+  "name": "night-owl",
+  "version": "1.0.0",
+  "description": "Anonymous late-night peer-to-peer student mental health chat",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["mental-health", "anonymous", "chat", "students"],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "socket.io": "^4.7.5"
+  }
+}

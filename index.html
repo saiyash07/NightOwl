@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Night Owl — Anonymous late-night peer support for students. You're not alone at 2 AM.">
+  <meta name="theme-color" content="#FFF8F0">
+  <title>Night Owl — You're Not Alone</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ═══ DEV MODE TOGGLE ═══ -->
+    <div class="dev-banner" id="devBanner" style="display:none;" title="Click to toggle dev mode">
+      🔧 DEV MODE
+    </div>
+
+    <!-- ═══ SCREEN 1: SLEEPING (Daytime) ═══ -->
+    <div class="screen" id="screen-sleeping">
+      <div class="clouds">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+      </div>
+      <div class="sleeping-content">
+        <div class="moon-container">
+          <div class="moon-glow"></div>
+          <div class="moon-icon">🌙</div>
+        </div>
+        <h1>Night Owl</h1>
+        <p class="tagline">Anonymous peer support for late nights</p>
+        <div class="countdown-container">
+          <div class="countdown-label">Opens in</div>
+          <div class="countdown-time" id="countdown">--:--:--</div>
+        </div>
+        <p class="sleeping-note">Come back tonight — someone will be here 💛</p>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN 2: LANDING (Night active) ═══ -->
+    <div class="screen" id="screen-landing">
+      <canvas id="fireflies"></canvas>
+      <div class="clouds">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+      </div>
+      <div class="landing-content">
+        <div class="brand">
+          <h1>Night <span>Owl</span></h1>
+        </div>
+        <div class="active-count" id="activeCount">
+          <span class="active-dot"></span>
+          <span id="activeNumber">0</span> students awake right now
+        </div>
+        <div class="mood-card">
+          <h2>How are you tonight?</h2>
+          <div class="mood-grid" id="moodGrid">
+            <button class="mood-btn" data-mood="lonely" data-role="venter" id="mood-lonely">
+              <span class="mood-emoji">😔</span> Lonely
+            </button>
+            <button class="mood-btn" data-mood="anxious" data-role="venter" id="mood-anxious">
+              <span class="mood-emoji">😰</span> Anxious
+            </button>
+            <button class="mood-btn" data-mood="overthinking" data-role="venter" id="mood-overthinking">
+              <span class="mood-emoji">🌀</span> Overthinking
+            </button>
+            <button class="mood-btn" data-mood="cant-sleep" data-role="venter" id="mood-cant-sleep">
+              <span class="mood-emoji">🫠</span> Can't Sleep
+            </button>
+            <button class="mood-btn" data-mood="need-someone" data-role="venter" id="mood-need-someone">
+              <span class="mood-emoji">😶</span> Just need someone
+            </button>
+            <button class="mood-btn" data-mood="sad" data-role="venter" id="mood-sad">
+              <span class="mood-emoji">🥺</span> Feeling low
+            </button>
+            <button class="mood-btn listener" data-mood="listener" data-role="listener" id="mood-listener">
+              <span class="mood-emoji">🤗</span> I'm okay — happy to listen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN 3: WAITING ROOM ═══ -->
+    <div class="screen" id="screen-waiting">
+      <div class="waiting-content">
+        <div class="paper-plane-container">
+          <span class="paper-plane">🕊️</span>
+        </div>
+        <h2>Finding someone...</h2>
+        <p class="subtitle">Connecting you with someone who understands</p>
+        <div class="breathing-circle-container">
+          <div class="breathing-circle"></div>
+        </div>
+        <p class="breathing-label">Breathe with the circle while you wait</p>
+        <div class="quote-card" id="quoteCard">
+          <p class="quote-text" id="quoteText">"Talking to a stranger at 3 AM saved my semester"</p>
+          <span class="quote-attr" id="quoteAttr">— A Night Owl, 2026</span>
+        </div>
+        <button class="cancel-btn" id="cancelSearch">Cancel</button>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN 4: CHAT ═══ -->
+    <div class="screen" id="screen-chat">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <span class="connected-dot"></span>
+          <span class="connected-label">Connected</span>
+        </div>
+        <span class="session-timer" id="sessionTimer">45:00</span>
+        <div class="chat-header-right">
+          <button class="header-btn sos-btn" id="sosBtn">🆘 SOS</button>
+          <button class="header-btn leave-btn" id="leaveBtn">👋 Leave</button>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <!-- Messages appear here -->
+      </div>
+
+      <div class="typing-indicator" id="typingIndicator">
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="chat-input-wrapper">
+          <input
+            type="text"
+            class="chat-input"
+            id="chatInput"
+            placeholder="Type something kind..."
+            maxlength="500"
+            autocomplete="off"
+          >
+        </div>
+        <button class="send-btn" id="sendBtn" disabled>
+          <span class="plane-icon">✈️</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN 5: SESSION END ═══ -->
+    <div class="screen" id="screen-end">
+      <div class="clouds">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+      </div>
+      <div class="end-content">
+        <div class="end-icon">🌅</div>
+        <h2 id="endTitle">Chat ended</h2>
+        <p class="end-message" id="endMessage">
+          They've headed to sleep. Hope your night gets better 💜
+        </p>
+        <div class="end-actions">
+          <button class="primary-btn" id="findAnotherBtn">Find someone else</button>
+          <button class="secondary-btn" id="goHomeBtn">I'm okay for now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOS OVERLAY ═══ -->
+    <div id="screen-sos">
+      <div class="sos-content">
+        <div class="sos-icon">💛</div>
+        <h2>You're not alone</h2>
+        <p class="sos-subtitle">Reach out — trained people are ready to help right now</p>
+        <div class="helpline-list">
+          <a href="tel:9152987821" class="helpline-item" id="helpline-icall">
+            <div class="helpline-info">
+              <div class="helpline-name">iCall (TISS)</div>
+              <div class="helpline-desc">Mon–Sat, 9 AM – 9 PM</div>
+            </div>
+            <span class="helpline-number">9152987821</span>
+          </a>
+          <a href="tel:08046110007" class="helpline-item" id="helpline-parivarthan">
+            <div class="helpline-info">
+              <div class="helpline-name">Parivarthan</div>
+              <div class="helpline-desc">Mon–Fri, 4 PM – 10 PM</div>
+            </div>
+            <span class="helpline-number">08046110007</span>
+          </a>
+          <a href="tel:9820466726" class="helpline-item" id="helpline-vandrevala">
+            <div class="helpline-info">
+              <div class="helpline-name">Vandrevala Foundation</div>
+              <div class="helpline-desc">24/7 — all days</div>
+            </div>
+            <span class="helpline-number">9999666555</span>
+          </a>
+          <a href="tel:18005990019" class="helpline-item" id="helpline-kiran">
+            <div class="helpline-info">
+              <div class="helpline-name">KIRAN Helpline</div>
+              <div class="helpline-desc">24/7 — toll free</div>
+            </div>
+            <span class="helpline-number">1800-599-0019</span>
+          </a>
+        </div>
+        <button class="sos-close" id="sosClose">Close</button>
+      </div>
+    </div>
+
+    <!-- ═══ CRISIS POPUP (auto-triggered) ═══ -->
+    <div class="crisis-popup" id="crisisPopup">
+      <p>It sounds like you might be going through something really tough. You don't have to face it alone. 💛</p>
+      <button class="crisis-action" id="crisisHelpBtn">Talk to someone now</button>
+      <button class="crisis-dismiss" id="crisisDismissBtn">I'm okay</button>
+    </div>
+
+    <!-- ═══ CONNECTION STATUS ═══ -->
+    <div class="connection-status" id="connectionStatus"></div>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
