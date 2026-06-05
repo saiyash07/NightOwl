@@ -10,7 +10,7 @@ import NightOwlCrypto from './crypto.js';
 // CONFIGURATION
 // ══════════════════════════════════════════════════
 // Paste your hosted backend URL here once deployed (e.g. 'https://night-owl-backend.onrender.com')
-const BACKEND_URL = '';
+const BACKEND_URL = 'https://night-owl-backend.onrender.com';
 
 // ══════════════════════════════════════════════════
 
