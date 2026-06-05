@@ -1,6 +1,11 @@
 {
-  "installCommand": "echo 'No installation needed'",
-  "buildCommand": "mkdir -p dist && cp -r index.html app.js styles.css censor.js crypto.js names.js particles.js dist/",
-  "outputDirectory": "dist",
-  "cleanUrls": true
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "styles.css", "use": "@vercel/static" },
+    { "src": "app.js", "use": "@vercel/static" },
+    { "src": "censor.js", "use": "@vercel/static" },
+    { "src": "crypto.js", "use": "@vercel/static" },
+    { "src": "names.js", "use": "@vercel/static" },
+    { "src": "particles.js", "use": "@vercel/static" }
+  ]
 }
