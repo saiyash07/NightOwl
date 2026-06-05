@@ -6,8 +6,14 @@
 import { FireflySystem } from './particles.js';
 import { censorMessage, detectCrisis } from './censor.js';
 import NightOwlCrypto from './crypto.js';
+// ══════════════════════════════════════════════════
+// CONFIGURATION
+// ══════════════════════════════════════════════════
+// Paste your hosted backend URL here once deployed (e.g. 'https://night-owl-backend.onrender.com')
+const BACKEND_URL = '';
 
 // ══════════════════════════════════════════════════
+
 // STATE
 // ══════════════════════════════════════════════════
 const state = {
@@ -155,7 +161,11 @@ function updateCountdown() {
 // SOCKET CONNECTION
 // ══════════════════════════════════════════════════
 function connectSocket() {
-  state.socket = io({
+  const connectionUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? ''
+    : BACKEND_URL;
+
+  state.socket = io(connectionUrl, {
     reconnection: true,
     reconnectionAttempts: 10,
     reconnectionDelay: 1000,

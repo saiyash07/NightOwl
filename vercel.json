@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "buildCommand": "mkdir -p dist && cp -r index.html app.js styles.css censor.js crypto.js names.js particles.js dist/",
+  "outputDirectory": "dist"
+}
